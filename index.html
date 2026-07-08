@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>People's Priorities | Constituency Development Portal</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="seal" aria-hidden="true">PP</div>
+        <div>
+          <p class="eyebrow">Government Constituency AI Portal</p>
+          <h1>People's Priorities</h1>
+        </div>
+      </div>
+      <nav class="quick-nav" aria-label="Primary">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#submit">Citizen Intake</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#projects">Projects</a>
+      </nav>
+      <div class="header-actions">
+        <select id="languageSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="ta">Tamil</option>
+          <option value="mr">Marathi</option>
+        </select>
+        <button class="ghost-button" id="loginDemo">MP Login</button>
+        <button class="solid-button" id="demoRefresh">Run AI Scan</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-band" id="dashboard">
+        <div class="hero-copy">
+          <p class="eyebrow">One-screen public grievance command centre</p>
+          <h2>Rank development work by citizen demand, local evidence, and urgency.</h2>
+          <p>
+            Complaints from WhatsApp, calls, portals, meetings, photos, and letters are merged into issue clusters,
+            mapped as hotspots, and converted into explainable funding priorities.
+          </p>
+        </div>
+        <div class="live-strip" aria-label="Live performance summary">
+          <div>
+            <strong id="complaintCount">2,486</strong>
+            <span>Complaints analyzed</span>
+          </div>
+          <div>
+            <strong id="duplicateCount">742</strong>
+            <span>Duplicates merged</span>
+          </div>
+          <div>
+            <strong id="wardCount">38</strong>
+            <span>Wards covered</span>
+          </div>
+          <div>
+            <strong id="responseScore">91%</strong>
+            <span>AI confidence</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workbench" aria-label="Constituency dashboard">
+        <aside class="priority-panel" id="projects">
+          <div class="section-title">
+            <p class="eyebrow">Recommended first</p>
+            <h2>Project Priority</h2>
+          </div>
+          <div id="priorityList" class="priority-list"></div>
+        </aside>
+
+        <section class="map-panel" aria-label="Complaint hotspot map">
+          <div class="map-head">
+            <div>
+              <p class="eyebrow">Google Maps style heat layer</p>
+              <h2>Constituency Hotspots</h2>
+            </div>
+            <div class="segmented" role="group" aria-label="Map issue filter">
+              <button class="active" data-filter="all">All</button>
+              <button data-filter="water">Water</button>
+              <button data-filter="road">Road</button>
+              <button data-filter="health">Health</button>
+            </div>
+          </div>
+          <div class="map-wrap">
+            <canvas id="heatmapCanvas" width="900" height="520" aria-label="Heatmap of complaints"></canvas>
+            <div class="map-card">
+              <span class="status-dot"></span>
+              <strong id="topHotspot">Najafgarh Water Belt</strong>
+              <small>400 complaints, 62% duplicate reports, 3.1 lakh people affected</small>
+            </div>
+          </div>
+          <div class="action-dock" aria-label="Project actions">
+            <button class="ghost-button" id="exportReport">Export Report</button>
+            <button class="ghost-button" id="notifyDept">Notify Dept</button>
+            <button class="solid-button" id="approveProject">Approve Priority</button>
+          </div>
+        </section>
+
+        <aside class="ai-panel">
+          <div class="section-title">
+            <p class="eyebrow">Gemini reasoning output</p>
+            <h2>AI Brief</h2>
+          </div>
+          <div class="brief-box">
+            <p id="aiSummary">
+              Water supply in Najafgarh should be funded first because complaint volume is high, tanker dependency is
+              rising, affected population is large, and the same issue is reported across voice, text, and field notes.
+            </p>
+          </div>
+          <div class="status-feed" id="statusFeed" aria-live="polite">
+            <strong>Live action</strong>
+            <span>Ready for constituency scan.</span>
+          </div>
+          <div class="mini-grid">
+            <div><strong>7</strong><span>Themes found</span></div>
+            <div><strong>18</strong><span>Locations extracted</span></div>
+            <div><strong>4</strong><span>Languages</span></div>
+            <div><strong>12</strong><span>Photos verified</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="operations-grid">
+        <form class="intake-panel" id="submit" aria-label="Citizen complaint form">
+          <div class="section-title">
+            <p class="eyebrow">Fast citizen entry</p>
+            <h2>Submit Complaint</h2>
+          </div>
+          <div class="input-row">
+            <label>
+              Channel
+              <select id="channelInput">
+                <option>WhatsApp Voice</option>
+                <option>Website Text</option>
+                <option>Public Meeting</option>
+                <option>Photo Upload</option>
+                <option>SMS</option>
+              </select>
+            </label>
+            <label>
+              Area
+              <select id="areaInput">
+                <option>Najafgarh</option>
+                <option>Rohini</option>
+                <option>Dwarka</option>
+                <option>Karol Bagh</option>
+                <option>Narela</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Complaint
+            <textarea id="complaintInput" rows="4">No clean water in my street for 5 days. Tankers come late and school children are missing classes.</textarea>
+          </label>
+          <div class="input-row compact">
+            <button type="button" class="ghost-button" id="voiceDemo">Voice</button>
+            <button type="button" class="ghost-button" id="photoDemo">Photo</button>
+            <button type="submit" class="solid-button">Analyze</button>
+          </div>
+        </form>
+
+        <section class="evidence-panel" id="evidence">
+          <div class="section-title">
+            <p class="eyebrow">Public data fused with complaints</p>
+            <h2>Evidence Layer</h2>
+          </div>
+          <div class="evidence-list" id="evidenceList"></div>
+        </section>
+
+        <section class="cluster-panel">
+          <div class="section-title">
+            <p class="eyebrow">Duplicates and themes</p>
+            <h2>AI Clusters</h2>
+          </div>
+          <div class="cluster-list" id="clusterList"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
